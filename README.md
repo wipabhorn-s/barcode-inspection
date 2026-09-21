@@ -6,16 +6,34 @@ electrical, appearance, hinge torque, automated visual inspection), then records
 
 **Stack:** VB.NET, .NET Framework 4.8, WinForms, PostgreSQL (Npgsql), MSTest
 
+**Download:** [BarcodeInspection-v1.0.zip](https://github.com/wipabhorn-s/barcode-inspection/releases/latest)
+(ready to run, no Visual Studio needed) · **Admin password:** `12345678`
+
+![Scanning a duplicate, a wrong format and a good part](screenshots/demo.gif)
+
+| | |
+|---|---|
+| ![Recorder](screenshots/recorder.png) | ![Combined carton](screenshots/combined.png) |
+| **Recorder:** final inspection; the carton is full at 5 of 5 | **Combined:** pack passed parts from several work orders into one carton |
+| ![Barcode reconciliation](screenshots/reconciliation.png) | ![Setting](screenshots/setting.png) |
+| **Barcode Reconciliation:** parts the database expects but were not scanned | **Setting:** product rules, behind the admin password |
+
 ## Try it
 
-You need Windows, Visual Studio 2022 or later with the .NET Framework 4.8 targeting pack, and PostgreSQL.
+You need Windows 10 or 11 and [PostgreSQL](https://www.postgresql.org/download/windows/).
 
 1. Create an empty database (for example `qa_db`) and run the scripts in `Database/` in order:
    `create_schema.sql`, then `003_sample_data.sql`.
    (`002_admin_password.sql` is only for databases created before the password table existed.)
-2. Copy `Barcode Inspection/connectionStrings.example.config` to `Barcode Inspection/connectionStrings.config`
-   and fill in host, user, password and database.
-3. Open `Barcode Inspection.sln`, choose **Release | x86**, and press **F5**.
+2. Get the program, either way:
+   - **Ready to run:** download the zip from [Releases](https://github.com/wipabhorn-s/barcode-inspection/releases/latest)
+     and unzip it. The `Database` scripts are inside it too.
+   - **From source:** open `Barcode Inspection.sln` in Visual Studio 2022 or later (with the .NET Framework 4.8
+     targeting pack) and choose **Release | x86**.
+3. Copy `connectionStrings.example.config` to `connectionStrings.config` in the same folder (in the zip folder,
+   or in `Barcode Inspection/` for the source) and fill in host, user, password and database.
+4. Run `Barcode Inspection.exe`, or press **F5** in Visual Studio. The status at the top left should say
+   **Connected**.
 
 **Admin password:** `12345678` (Setting tab, Query Console, deleting records).
 Change it with **Change Password** on the Setting tab; it is stored only as a salted hash.
