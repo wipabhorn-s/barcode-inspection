@@ -24,12 +24,13 @@ Change it with **Change Password** on the Setting tab; it is stored only as a sa
 
 | Tab | Do this | Expect |
 |---|---|---|
-| Recorder | Product `DEMO-BASIC`, work order `WO-DEMO-001`, line `1`, operator `OP00001`, carton `1` → Load, scan `DB00005` | PASS, and the carton is full (5 of 5) |
-| Recorder | Same carton, scan `DB00001` | FAIL: duplicate barcode |
+| Recorder | Product `DEMO-BASIC`, work order `WO-DEMO-001`, line `1`, operator `OP00001`, carton `1` → Load | 4 of 5 parts |
+| Recorder | Scan `DB00001` | FAIL: duplicate barcode (failures are not counted into the carton) |
 | Recorder | Scan `XX12345` | FAIL: barcode format |
-| Recorder | Product `DEMO-HINGE`, work order `WO-DEMO-002`, carton `1`, scan `DH00002` then hinge `H0002` | PASS (the cursor moves to the hinge box by itself) |
-| Recorder | Product `DEMO-RUNNING`, add work order `WO-DEMO-004`, running no. `00001-00050`, scan `DR00099` | Asks Rework / Reject |
-| Combined | Product `DEMO-BASIC`, carton `1`, scan `DB00002` | PASS; `DB00003` is refused (already combined) |
+| Recorder | Scan `DB00005` | PASS; the carton is full (5 of 5) and the barcode box locks |
+| Recorder | Product `DEMO-HINGE`, work order `WO-DEMO-002`, line, operator, carton `1` → Load, scan `DH00002` then hinge `H0002` | PASS (the cursor moves to the hinge box by itself) |
+| Recorder | Product `DEMO-RUNNING`, add work order `WO-DEMO-004`, running no. `00001-00050`, line, operator, carton `1` → Load, scan `DR00099` | Asks Rework / Reject |
+| Combined | Product `DEMO-BASIC`, operator `OP00006`, carton `1` → Load, scan `DB00002` | PASS; `DB00003` is refused (already combined) |
 | Barcode Reconciliation | Product `DEMO-BASIC`, scan `DB00001` and `DB00003`, then work order `WO-DEMO-001`, carton `1` → Compare | `DB00002` and `DB00004` are listed as missing |
 | Data Management | Search `DEMO-BASIC` by work order | Passed parts, combined cartons, and the FAIL list with **Defect** ticked |
 
